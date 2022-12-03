@@ -18,13 +18,16 @@ class Cart
      VG: Om produkten redan finns i kundvagnen
      skall istället quantity på cartitem ökas.
      */
-    public function addProduct($product)
+    public function addProduct($product, $quantity)
     {
-        $cartitem = new CartItem($product, 1);
-
-        $this->items[$product->getId()] = $cartitem;
-
-        return $cartitem;
+        if(isset($this->items[$product->getId()])) {
+            $this->items[$product->getId()->increaseQuantity()];
+        } else {
+            $cartItem = new CartItem($product, $quantity);
+            $this->items[$product->getId()] = $cartItem;
+        }
+        
+        return $cartItem;
     }
 
 
